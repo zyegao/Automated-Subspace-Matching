@@ -1,0 +1,72 @@
+batch_size: 8
+iters: 80000
+
+train_dataset:
+  type: Dataset
+  dataset_root: /az-data/Allkuang/kuang2700dataset/
+  train_path: /az-data/Allkuang/kuang2700dataset/train.txt
+  num_classes: 2
+  transforms:
+    - type: Resize
+      target_size: [512, 512]
+    - type: Normalize
+  mode: train
+
+val_dataset:
+  type: Dataset
+  dataset_root: /az-data/Allkuang/kuang2700dataset/
+  val_path: /az-data/Allkuang/kuang2700dataset/val.txt
+  num_classes: 2
+  transforms:
+    - type: Resize
+      target_size: [512, 512]
+    - type: Normalize
+  mode: val
+
+
+# optimizer:
+#   type: adam
+#   weight_decay: 4.0e-5
+#   backbone_lr_mult: 0.1
+
+optimizer:
+  type: SGD
+  momentum: 0.9
+  weight_decay: 4.0e-5
+  custom_cfg:
+        - name: backbone
+          lr_mult: 0.1
+
+lr_scheduler:
+  type: PolynomialDecay
+  learning_rate: 0.01
+  end_lr: 0
+  power: 0.9
+
+loss:
+  types:
+    - type: MixedLoss
+      losses:
+        - type: CrossEntropyLoss
+        - type: LovaszSoftmaxLoss
+        - type: AffinityLoss
+          num_classes: 2
+          init_step : 0
+          max_iter: 80000
+      coef: [0.4, 0.2, 0.4]
+  coef: [1]
+
+
+model:
+  type: DeepLabV3P
+  backbone:
+    type: ResNet50_vd
+    output_stride: 8
+    multi_grid: [1, 2, 4]
+    pretrained: https://bj.bcebos.com/paddleseg/dygraph/resnet50_vd_ssld_v2.tar.gz
+  num_classes: 2
+  backbone_indices: [0, 3]
+  aspp_ratios: [1, 12, 24, 36]
+  aspp_out_channels: 256
+  align_corners: False
+  pretrained: null
