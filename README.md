@@ -33,7 +33,7 @@ pip install "paddleocr==2.7.0" -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ## Example Usages
 
-The dataset can be obtained from the following [link](https://drive.google.com/file/d/1VRuwxMojBlhNG2eimeITnEubTW6fA91I/view?usp=sharing).
+The **DataSet** can be obtained from the following [link](https://drive.google.com/file/d/1VRuwxMojBlhNG2eimeITnEubTW6fA91I/view?usp=sharing).
 
 Train
 You can train your own semantic segmentation model for floor plans.
@@ -54,9 +54,5 @@ The following subspace comparison results can be obtained through the following 
 python utils/Subspace_Match.py
 ```
 
-
-
 ![](assets/20250314_155405_combined_image.jpg)
-
-
 
