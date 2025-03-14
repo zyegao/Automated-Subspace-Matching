@@ -1,4 +1,5 @@
 # Automated Subspace Matching for Residential Floor Plans using Deep Learning: Enhancing Interior Design Efficiency
+[![DOI](https://zenodo.org/badge/948368755.svg)](https://doi.org/10.5281/zenodo.15023446)
 
 This repository contains code for an automated method to extract the data structure of subspaces of residential floor plans and compare it with case data.
 
